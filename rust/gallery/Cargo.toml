@@ -1,0 +1,11 @@
+[package]
+name = "gallery"
+version = "0.1.0"
+authors = ["goncalopalaio <goncalopalaio@gmail.com>"]
+
+[dependencies]
+glium = "*"
+image = "*"
+rand = "*"
+glium_text_rusttype = "*"
+csv = "1.0.0-beta.5"

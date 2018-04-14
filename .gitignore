@@ -1,4 +1,11 @@
+
 images/
+python/checkpoints/
+python/.*
+rust/gallery/src/tmp* 
+rust/gallery/target
+rust/gallery/Cargo.lock
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
