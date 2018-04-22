@@ -1,5 +1,6 @@
 
 images/
+muct_face_database/
 python/checkpoints/
 python/.*
 rust/gallery/src/tmp* 
