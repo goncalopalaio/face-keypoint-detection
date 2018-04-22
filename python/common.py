@@ -6,12 +6,13 @@ import utils as util
 
 class BatchDataLoader:
 	"""Loads data in batches"""
-	def __init__(self, train_val_split = 0.7, randomize_indices = True):
+	def __init__(self, train_val_split = 0.7, randomize_indices = True, load_one_channel = False, skip_missing_values = False):
 		# let's just assume the images are there
 		self.total_train = 7049
 		self.total_test = 1783
 		self.train_path_format = "../images/train/{}_img.png"
 		self.test_path_format = "../images/test/{}_img.png"
+		self.load_one_channel = load_one_channel
 
 		path_dataset_folder = "../dataset/"
 		path_dataset_train = path_dataset_folder + "training.csv"
@@ -20,6 +21,21 @@ class BatchDataLoader:
 
 		self.train = pd.read_csv(path_dataset_train_simplified)
 		self.test = pd.read_csv(path_dataset_test)
+
+		if skip_missing_values:
+			print("Removing missing values :: original Train", np.shape(self.train))
+			l, cols = np.shape(self.train)
+			keep = []
+			for i in range(l):
+				if not np.isnan(self.train.loc[i][1:]).any():
+					keep.append(i)
+				
+			self.train = self.train.loc[keep][1:]
+
+			#self.train = self.train[~np.isnan(self.train).any()]
+			self.total_train = np.shape(self.train)[0]
+			print("Removed missing values :: new Train", np.shape(self.train))
+			print("Removed missing values :: New total for train (and val)", self.total_train)
 
 		self.randomize_indices = randomize_indices
 		self.train_val_split = train_val_split
@@ -119,7 +135,11 @@ class BatchDataLoader:
 					i = 0
 
 				idx = indices[i]
-				x.append(plt.imread(str_template.format(idx)))
+				img = plt.imread(str_template.format(idx))
+				if self.load_one_channel:
+					img = img[:,:,0]
+					print(np.shape(img))
+				x.append(img)
 				y.append(self.train.loc[idx][1:])
 
 				i += 1
@@ -187,4 +207,5 @@ def test():
 	test_totals()
 
 if __name__ == '__main__':
-	test()
+	pass
+	#test()

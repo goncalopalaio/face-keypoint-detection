@@ -1,0 +1,2 @@
+linear regression, 30 individual models: Average acc_mean_squared_error: 10.246590792800308 Average mean_absolute_error: 2.407199606630758
+

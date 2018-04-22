@@ -6,7 +6,7 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import mean_absolute_error
 from sklearn.preprocessing import MinMaxScaler
 
-SMALL_DATASET = True
+SMALL_DATASET = False
 
 def breakdown(x_data, y_data):
 	print("\t-> ", np.shape(x_data), " -> ", np.shape(y_data))
