@@ -60,7 +60,7 @@ class BatchDataLoader:
 
 	def train_batch_generator(self, batch_size, total = None):
 		self._rebuild_indices('train')
-		print("Traingdddd",batch_size, total)
+		#print("Training",batch_size, total)
 		if total is None:
 			total =  len(self.train_indices) // batch_size
 
